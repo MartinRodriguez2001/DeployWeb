@@ -21,7 +21,7 @@ gem "jbuilder"
 
 # Authentication
 gem "bcrypt", "~> 3.1.7"
-gem "jwt", "~> 2.7"
+gem "jwt", "~> 3.0"
 
 # Use Bootstrap for styling
 gem "bootstrap", "~> 5.3.0"
