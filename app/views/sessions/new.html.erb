@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow p-4" style="min-width: 350px; max-width: 400px;">
+    <div class="text-center mb-3">
+      <span class="gradient-text fs-2 fw-bold">PicLens</span>
+    </div>
+    <h3 class="text-center mb-4">Iniciar Sesión</h3>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
+    <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+      <div class="mb-3">
+        <%= f.label :email, "Email", class: "form-label" %>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :password, "Contraseña", class: "form-label" %>
+        <%= f.password_field :password, class: "form-control", required: true %>
+      </div>
+      <%= f.submit "Iniciar Sesión", class: "btn btn-primary w-100 fw-bold" %>
+    <% end %>
+    <div class="text-center mt-3">
+      ¿No tienes una cuenta?
+      <%= link_to "Regístrate", new_user_path, class: "fw-bold" %>
+    </div>
+  </div>
+</div>

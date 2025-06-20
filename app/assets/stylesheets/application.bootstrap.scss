@@ -1,0 +1,111 @@
+@import "bootstrap/scss/bootstrap";
+
+// Custom styles
+:root {
+  --primary-color: #405DE6;
+  --secondary-color: #5851DB;
+  --accent-color: #833AB4;
+  --success-color: #4CAF50;
+  --danger-color: #E1306C;
+  --warning-color: #FCAF45;
+  --info-color: #00BCD4;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #232b3a !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.footer {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: #1a202c;
+  color: #fff;
+  text-align: center;
+  border-top: none;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #36d1c4, #5b86e5, #b06ab3, #f7971e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+.card-feature {
+  background: #2d3648;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.card-feature:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  background: #3a4661;
+}
+
+.user-avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.post-actions {
+  padding: 0.5rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.hashtag-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: 50%;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}

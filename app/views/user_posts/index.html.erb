@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="mb-4">Mis publicaciones</h2>
+  <% if @posts.any? %>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <% if post.images.any? %>
+              <img src="<%= post.images.first.image_url %>" class="card-img-top post-image" alt="Imagen del post">
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to truncate(post.caption, length: 50), post_path(post) %></h5>
+              <p class="card-text"><%= post.location %></p>
+              <div>
+                <% post.hashtags.each do |hashtag| %>
+                  <span class="badge bg-primary">#<%= hashtag.tag %></span>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <%= link_to post_path(post, anchor: 'comments'), class: "text-decoration-none" do %>
+                    <i class="bi bi-chat"></i> <%= pluralize(post.comments.count, 'comentario') %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to post_path(post), class: "text-decoration-none" do %>
+                    <i class="bi bi-heart"></i> <%= pluralize(post.likes.count, 'me gusta') %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No has publicado nada aún.</p>
+  <% end %>
+</div> 

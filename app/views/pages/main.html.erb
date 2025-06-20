@@ -1,0 +1,68 @@
+<div class="container py-5">
+  <h2 class="mb-4 text-center gradient-text">Tu feed</h2>
+  <div class="row g-4">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card post-card h-100">
+            <% if post.images.any? %>
+              <% if post.images.first.image_url.present? %>
+                <% image_url = post.images.first.image_url %>
+                <% image_url = "http://#{image_url}" unless image_url.start_with?('http://', 'https://') %>
+                <img src="<%= image_url %>" class="card-img-top post-image" alt="Imagen del post">
+              <% elsif post.images.first.file.attached? %>
+                <%= image_tag url_for(post.images.first.file), class: "card-img-top post-image", alt: "Imagen del post" %>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title fw-bold">
+                <%= link_to post.caption, post_path(post), class: "text-decoration-none" %>
+              </h5>
+              <% if post.hashtags.any? %>
+                <div class="mt-2 mb-3">
+                  <% post.hashtags.each do |hashtag| %>
+                    <span class="badge bg-primary me-1 mb-1">#<%= hashtag.tag %></span>
+                  <% end %>
+                </div>
+              <% end %>
+              <div class="d-flex align-items-center mt-3 mb-2">
+                <% if post.user.profile_picture.attached? %>
+                  <%= image_tag post.user.profile_picture, class: "user-avatar-sm me-2" %>
+                <% elsif post.user.photo_profile.present? %>
+                  <% profile_url = post.user.photo_profile %>
+                  <% profile_url = "http://#{profile_url}" unless profile_url.start_with?('http://', 'https://') %>
+                  <img src="<%= profile_url %>" class="user-avatar-sm me-2">
+                <% else %>
+                  <i class="bi bi-person-circle me-2" style="font-size: 1.5rem;"></i>
+                <% end %>
+                <span class="fw-bold"><%= post.user.user_name %></span>
+              </div>
+              <div class="d-flex gap-2 mt-2">
+                <%= button_to post_likes_path(post), method: :post, class: "btn btn-outline-danger btn-sm px-3" do %>
+                  <i class="bi bi-heart"></i> <%= post.likes.count %>
+                <% end %>
+                <%= link_to post_path(post, anchor: 'comments'), class: "btn btn-outline-primary btn-sm px-3" do %>
+                  <i class="bi bi-chat"></i> <%= post.comments.count %>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-footer text-muted small">
+              <%= time_ago_in_words(post.created_at) %> atrás
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-12">
+        <div class="alert alert-info text-center">No hay publicaciones para mostrar.</div>
+      </div>
+    <% end %>
+  </div>
+  <div class="my-4 d-flex justify-content-center">
+    <nav aria-label="Paginación de publicaciones">
+      <ul class="pagination pagination-lg">
+        <%= paginate @posts %>
+      </ul>
+    </nav>
+  </div>
+</div> 
